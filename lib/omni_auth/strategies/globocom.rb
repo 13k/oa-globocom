@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'oa-core'
+require 'omniauth'
 require 'cadun'
 require 'cadun/config'
 
@@ -12,9 +12,11 @@ module OmniAuth
       
       def initialize(app, opts = {})
         Cadun::Config.load_file opts[:config]
-        
+
+        opts[:name] = 'cadun'
         @logger = opts[:logger]
-        super app, :cadun, opts
+
+        super app, opts
       end
       
       def request_phase
